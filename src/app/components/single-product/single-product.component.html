@@ -1,0 +1,108 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h3 class="text-theme-primary">{{formStatus}} Product</h3>
+      <p class="mb-5">You can {{formStatus}} product details here </p>
+    </div>
+  </div>
+  <div *ngIf="productForm">
+    <form action="" [formGroup]="productForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-md-7">
+          <div class="card shadow-effect">
+            <div class="card-body">
+              <div class="form-group">
+                <label for=""> Product Name </label>
+                <input type="text" class="form-control" formControlName="name"
+                  [ngClass]="{'is-invalid': fc['name'].touched && fc['name'].invalid}">
+                <div *ngIf="fc['name'].errors?.['required']">
+                  <div class="alert alert-danger" *ngIf="fc['name'].touched && fc['name'].invalid">Product name is
+                    required
+                  </div>
+                </div>
+                <div *ngIf="fc['name'].errors?.['minlength']">
+                  <div class="alert alert-danger" *ngIf="fc['name'].touched && fc['name'].invalid">Product name must be
+                    at least 10 characters long</div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="">Please Select a post category</label>
+                <select class="form-control" formControlName="category"
+                  [ngClass]="{'is-invalid': fc['category'].touched && fc['category'].invalid}">
+                  <option value="" disabled selected>Please select a category </option>
+                  <option *ngFor='let category of categories' value="{{category.id}}-{{category.category}}">{{
+                    category.category }}</option>
+                </select>
+                <div *ngIf="fc['category'].errors?.['required']">
+                  <div class="alert alert-danger" *ngIf="fc['category'].touched && fc['category'].invalid">Please select
+                    a
+                    post category</div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for=""> Product Description </label>
+                <textarea cols="30" rows="10" class="form-control" formControlName="description"
+                  [ngClass]="{'is-invalid': fc['description'].touched && fc['description'].invalid}"></textarea>
+                <div *ngIf="fc['description'].errors?.['required']">
+                  <div class="alert alert-danger" *ngIf="fc['description'].touched && fc['description'].invalid">
+                    Product
+                    description is required</div>
+                </div>
+                <div *ngIf="fc['description'].errors?.['minlength']">
+                  <div class="alert alert-danger" *ngIf="fc['description'].touched && fc['description'].invalid">
+                    Product
+                    description must be at least 20 characters long</div>
+                </div>
+              </div>
+              <!-- <div class="form-group">
+                <label for=""> Product Details </label>
+                <ul class="form-control" formControlName="details"
+                  [ngClass]="{'is-invalid': fc['details'].touched && fc['details'].invalid}">
+                  <li *ngFor='let detail of productDetails; let i = index'>
+                     <input type="text" [(ngModel)]="detail" name="detail-{{i}}">
+                    <input type="text" [(ngModel)]="productDetails[i]" name="detail-{{i}}">
+
+                  </li>
+                </ul>
+                <div *ngIf="fc['details'].errors?.['required']">
+                  <div class="alert alert-danger" *ngIf="fc['details'].touched && fc['details'].invalid">Product details
+                    are required</div>
+                </div>
+              </div> -->
+            </div>
+          </div>
+        </div>
+        <div class="col-md-5">
+          <div class="form-group">
+            <label for=""> Product Price (in INR) </label>
+            <input type="number" class="form-control" formControlName="price"
+              [ngClass]="{'is-invalid': fc['price'].touched && fc['price'].invalid}" placeholder="Enter price in INR">
+            <div *ngIf="fc['price'].errors?.['required']">
+              <div class="alert alert-danger" *ngIf="fc['price'].touched && fc['price'].invalid">Product price is
+                required</div>
+            </div>
+            <div *ngIf="fc['price'].errors?.['min']">
+              <div class="alert alert-danger" *ngIf="fc['price'].touched && fc['price'].invalid">Product price must be
+                at least 0</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for=""> Product Image </label>
+            <img [src]="imgSrc" class="form-control img-fluid img-preview">
+            <input type="file" class="form-control-file" accept="image/*" formControlName="image"
+              (change)="showPreview($event)">
+          </div>
+
+        </div>
+        <div class="col-md-12 text-center mb-5">
+          <button class="btn btn-info bg-theme" [disabled]="productForm.invalid">{{formStatus}} Product</button>
+          <button class="btn btn-warning ml-3" routerLink="/product-details">Back to Product</button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</div>

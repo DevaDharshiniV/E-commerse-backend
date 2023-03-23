@@ -1,0 +1,11 @@
+header {
+  height: 100px;
+}
+.logo{
+  font-style: italic;
+  font-size: 2rem;
+  font-family: cursive;
+  color:#fe7773;
+  font-weight: bold;
+  text-decoration: none;
+}

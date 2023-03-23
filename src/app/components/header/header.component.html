@@ -1,0 +1,10 @@
+<header class=" navbar navbar-expand-lg fixed-top bg-white ">
+  <div class="container justify-content-center">
+    <a routerLink="login" class="logo">Girly</a>
+  </div>
+
+  <div class="container justify-content-center" *ngIf="isLoggedIn$ | async">
+    <a style="text-decoration: none;" class="mr-3">dharshini@girly.net</a>
+    <button class="btn btn-sm  bg-secondary-theme" (click) = "onLogout()">Logout</button>
+  </div>
+</header>

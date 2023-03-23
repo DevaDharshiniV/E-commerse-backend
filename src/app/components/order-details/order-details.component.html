@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 bg-secondary-theme p-5 shadow-effect">
+      <h3 class="text-center text-theme-primary">Order Management</h3>
+      <p class="text-center mb-5">View and manage orders here!</p>
+  <div class="card shadow-effect">
+    <div class="card-body">
+      <table class="table row-border hover">
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Customer Name</th>
+            <th>Order Date</th>
+            <th>Order Status</th>
+            <!-- <th>Payment Method</th> -->
+            <th>Shipping Address</th>
+            <th>Order Amount</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of orders">
+            <td>{{order.id}}</td>
+            <td>{{order.name}}</td>
+            <td>{{order.dateOrdered | date}}</td>
+            <td>
+              <select class="form-control" [(ngModel)]="order.status" (change)="onUpdateStatus(order)">
+                <option *ngFor="let status of orderStatuses" [value]="status" disabled>{{ status }}</option>
+              </select>
+              <!-- <label>Order Status: {{ selectedOrder?.status }}</label> -->
+              <!-- <select [(ngModel)]="selectedStatus" (change)="onStatusChange()">
+                <option *ngFor="let status of orderStatuses" [value]="status">{{status}}</option>
+              </select> -->
+
+
+            </td>
+            <td>{{order.address.street}}<br>{{order.address.city}}<br>{{order.address.state}}{{order.address.zip}}</td>
+            <td>{{order.total}}</td>
+            <td>
+              <button class="btn btn-sm btn-success" (click)="onUpdateStatus(order)">Update</button>
+              <button class="btn btn-sm btn-danger" (click)="onCancelOrder(order)">Cancel</button>
+              <button class="btn btn-sm btn-primary" (click)="onRefundOrder(order)">Refund</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+  </div>
+</div>
+
